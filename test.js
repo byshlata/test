@@ -1,43 +1,29 @@
-function dirReduc(arr){
-    let arrayNamber = [];
+function generateHashtag (str) {
 
-    for ( let i = 0; i < arr.length; i++){
-        if (arr[i] == 'NORTH' ){
-            arrayNamber[i] = 1;
-        } 
-        if (arr[i] == 'SOUTH' ){
-            arrayNamber[i] = -1;
-        }
-        if (arr[i] == 'EAST'){
-            arrayNamber[i] = 2;
-        }
-        if (arr[i] == 'WEST'){
-            arrayNamber[i] = -2;
+    if (str.replace(/\s/g, '').length > 139) {
+      return false;
+    }
+    let array = str.split(' ');
+    let strOff = '#';
+    let index = 0;
+    for (let i = 0; i < array.length; i++){
+        if (array[i] != ''){
+            let arrayWord = array[i].split('');
+            arrayWord [0] = arrayWord[0].toUpperCase();
+            let strNew = arrayWord.join ('');
+            strOff = strOff.concat(strNew);
+        } else {
+            index++;
         }
     }
-    for ( let i = 0; i < arr.length - 1; i++){
-        if ((arrayNamber[i] + arrayNamber[i+1]) == 0){
-            arrayNamber.splice(i, 2);
-            i = -1;
-        }
-    }
-    let arrayNamberOff = [];
-    for ( let i = 0; i < arrayNamber.length; i++){
-        if (arrayNamber[i] ==  1){
-            arrayNamberOff[i] = 'NORTH';
-        } 
-        if (arrayNamber[i] == -1){
-            arrayNamberOff[i] = 'SOUTH';
-        }
-        if (arrayNamber[i] == 2){
-            arrayNamberOff[i] = 'EAST';
-        }
-        if (arrayNamber[i] == -2){
-            arrayNamberOff[i] = 'WEST';
-        }
-    }
-
-    return arrayNamberOff;
+    if (index == array.length){
+        return false;
+    } else {
+        return strOff;
+    }   
   }
-    console.log (dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]));
+
+
+
+    console.log (generateHashtag("a".repeat(139)));
 
