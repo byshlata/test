@@ -1,29 +1,31 @@
-function generateHashtag (str) {
+function score( dice ) {
+    dice.sort();
+    let points = 0;
+    for (let i = 0; i < 3; i++){
 
-    if (str.replace(/\s/g, '').length > 139) {
-      return false;
-    }
-    let array = str.split(' ');
-    let strOff = '#';
-    let index = 0;
-    for (let i = 0; i < array.length; i++){
-        if (array[i] != ''){
-            let arrayWord = array[i].split('');
-            arrayWord [0] = arrayWord[0].toUpperCase();
-            let strNew = arrayWord.join ('');
-            strOff = strOff.concat(strNew);
-        } else {
-            index++;
+        if ((dice[i] == dice[i+1]) && (dice[i]== dice[i+2]) ){
+            if (dice[i] != 1){
+                points = dice[i] * 100;
+            } else {
+                points = 1000;
+            }
+            dice.splice(i, 1);
+            dice.splice(i, 1);
+            dice.splice(i, 1);
+            i = Infinity;
         }
     }
-    if (index == array.length){
-        return false;
-    } else {
-        return strOff;
-    }   
-  }
+ for ( let i = 0; i < dice.length; i++){
+     if ( dice [i] == 1) {
+         points = points + 100;
+     }
+     if ( dice [i] == 5) {
+         points = points + 50;
+     }
+ }
+        return points;
+    }
 
 
-
-    console.log (generateHashtag("a".repeat(139)));
+    console.log (score([2, 4, 4, 5, 4]));
 
