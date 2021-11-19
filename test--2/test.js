@@ -1,60 +1,103 @@
-function doneOrNot(board){
-  let sumRows = 0;
-  let sumColumns = 0;
-  for (let i = 0; i < 9; i++){
-    for (let k = 0; k < 9; k++){
-      sumRows += board[i][k];
+function formatDuration (seconds) {
+    let day = 0;
+    let hour = 0;
+    let minute = 0;
+    let second = 0;
+    let array = [];
+    let arrayTest = [];
+    let index = 0;
+
+    year = Math.trunc(seconds / 365 / 24 / 60 / 60) ;
+    day = Math.trunc((seconds - year * 365 * 24 * 60 * 60) / 24 / 60/ 60) ;
+
+    hour = Math.trunc((seconds - year * 365 * 24 * 60 * 60 - day * 24 * 60 * 60) / 60 / 60);
+    console.log ( hour);
+    minute = Math.trunc((seconds - year * 365 * 24 * 60 * 60 - day * 24 * 60 * 60 - hour * 60 *60) / 60);
+    second = Math.trunc(seconds - year * 365 * 24 * 60 * 60 - day * 24 * 60 * 60 - hour * 60 *60 - minute * 60);
+ 
+    if ( year > 0 && year < 2) {
+    let yearStr = year + " year";
+    array.push(yearStr);
+    arrayTest.push(year);
+    } else if (year >= 2){
+    let yearStr = year + " years";
+    array.push(yearStr);
+    arrayTest.push(year);
     }
-    if (sumRows != 45){
-      return 'Try again!';
+    if ( day > 0 && day < 2) {
+    let dayStr = day + " day";
+    array.push(dayStr);
+    arrayTest.push(day);
+    } else if (day >= 2){
+    let dayStr = day + " days";
+    array.push(dayStr);
+    arrayTest.push(day);
     }
-    sumRows = 0;
-  }
 
-  for (let i = 0; i < 9; i++){
-    for (let k = 0; k < 9; k++){
-      sumColumns += board[k][i];
+    if ( hour > 0 && hour < 2) {
+    let hourStr = hour + " hour";
+    array.push(hourStr);
+    arrayTest.push(hour);
+    } else if (hour >= 2){
+    let hourStr = hour + " hours";
+    array.push(hourStr);
+    arrayTest.push(hour);
     }
-    if (sumColumns != 45){
-      return false;
+
+    if ( minute > 0 && minute < 2) {
+    let minuteStr = minute + " minute";
+    array.push(minuteStr);
+    arrayTest.push(minute);
+    } else if (minute >= 2){
+    let minuteStr = minute + " minutes";
+    array.push(minuteStr);
+    arrayTest.push(minute);
     }
-    sumColumns = 0;
-  }
+
+    if ( second > 0 && second < 2) {
+    let secondStr = second + " second";
+    array.push(secondStr);
+    arrayTest.push(second);
+    } else if (second >= 2){
+    let secondStr = second + " seconds";
+    array.push(secondStr);
+    arrayTest.push(second);
+    }
 
 
-  if ((sumRegion(0, 0, board) == false) || (sumRegion(3, 0, board) == false) || (sumRegion(6, 0, board) == false) || (sumRegion(0, 3, board) == false) || (sumRegion(3, 3, board) == false) || (sumRegion(6, 3, board) == false) || (sumRegion(0, 6, board) == false) || (sumRegion(3, 6, board) == false) || (sumRegion(6, 6, board) == false)){
-    return false;
-  }
 
+    for (let i = 0; i < arrayTest.length; i++){
+        if (arrayTest[i] > 0){
+            index++;
+        }
+    }
+let strOff = '';
+    if ( index == 0){
+        return "now";
+    }
+    if (index == 1){
+        return array[0];
+    }
+    if ( index == 2) {
+        return array [0] + " and " + array [1];
+    }
 
- return true;
+    if ( index > 2){
+
+        for ( let i = 0; i < array.length; i++){
+            if (i < (array.length - 2)){
+            strOff += array [i] + ", ";
+            } else {
+            strOff += array [array.length - 2] + " and " + array [array.length - 1];
+            i++;
+            }
+        }
+        return strOff;
+    }
+
 }
 
 
-function sumRegion(i, k, array){
-  let sum = 0;
-  let row = i + 3;
-  let col = k + 3;
-  for (i; i < row; i++){
-    for (k; k < col; k++){
-      sum += array [i][k];
-    }
-    k = k -3;
-  }
-  if (sum != 45){
-    return false;
-  }
-  else {
-    return true;
-  }
-}
-    console.log (doneOrNot([[ 5, 3, 4, 6, 7, 8, 9, 1, 2 ],
-                            [ 6, 7, 2, 1, 9, 5, 3, 4, 8 ],
-                            [ 1, 9, 8, 3, 4, 2, 5, 6, 7 ],
-                            [ 8, 5, 9, 7, 6, 1, 4, 2, 3 ],
-                            [ 4, 2, 6, 8, 5, 3, 7, 9, 1 ],
-                            [ 7, 1, 3, 9, 2, 4, 8, 5, 6 ],
-                            [ 9, 6, 1, 5, 3, 7, 2, 8, 4 ],
-                            [ 2, 8, 7, 4, 1, 9, 6, 3, 5 ],
-                            [ 3, 4, 5, 2, 8, 6, 1, 7, 9 ] ]));
+    console.log (formatDuration(15724900));
 
+/*     1000037, 1000039 */
